@@ -56,22 +56,20 @@ Session 3 — Python-AI Series
 ## Why Now? Three Breakthroughs 🚀
 
 ```
-2017                    2020                    2022-2024
- │                       │                       │
- ▼                       ▼                       ▼
-┌──────────────┐   ┌──────────────┐   ┌──────────────────┐
-│ Transformers │   │ Scaling Laws │   │ RLHF             │
-│              │   │              │   │                  │
-│ "Attention   │   │ More data +  │   │ Human feedback   │
-│  is all you  │──►│ more compute │──►│ makes models     │
-│  need"       │   │ = better     │   │ helpful & safe   │
-│  (Google)    │   │ models       │   │                  │
-└──────────────┘   └──────────────┘   └──────────────────┘
+             2017                 2020              2022-2024
+              │                    │                    │
+              ▼                    ▼                    ▼
+        ┌──────────────┐   ┌──────────────┐   ┌──────────────────┐
+        │ Transformers │   │ Scaling Laws │   │ RLHF             │
+        │              │   │              │   │                  │
+        │ "Attention   │   │ More data +  │   │ Human feedback   │
+        │  is all you  │──►│ more compute │──►│ makes models     │
+        │  need"       │   │ = better     │   │ helpful & safe   │
+        │  (Google)    │   │ models       │   │                  │
+        └──────────────┘   └──────────────┘   └──────────────────┘
 ```
 
-### The Result
-
-- 🧩 Better architecture + 📈 More scale + 👨‍🏫 Human alignment = **ChatGPT, Claude, etc.**
+🧩 Better architecture + 📈 More scale + 👨‍🏫 Human alignment = **ChatGPT, Claude, etc.**
 
 ---
 
@@ -87,15 +85,12 @@ Session 3 — Python-AI Series
 
 ```
 Input:  "The cat sat on the mat"
-
 Tokens: ┌─────┐ ┌─────┐ ┌─────┐ ┌────┐ ┌─────┐ ┌─────┐
         │ The │ │ cat │ │ sat │ │ on │ │ the │ │ mat │
         └──┬──┘ └──┬──┘ └──┬──┘ └─┬──┘ └──┬──┘ └──┬──┘
            ▼       ▼       ▼      ▼       ▼       ▼
 IDs:    [ 464 ] [3797 ] [3332 ] [ 319 ] [ 262 ] [2603 ]
 ```
-
-### Surprising Examples
 
 ```
 "Unbelievable!" → ["Un", "believ", "able", "!"]   (4 tokens)
@@ -115,17 +110,19 @@ IDs:    [ 464 ] [3797 ] [3332 ] [ 319 ] [ 262 ] [2603 ]
 ```
 Input: "The cat sat on the"
 
-                        ┌────────────────────┐
-                        │  Next token odds:  │
-                        │                    │
-                        │  "mat"    → 32%    │
-                        │  "floor"  → 18%    │
-                        │  "couch"  → 12%    │
-                        │  "bed"    →  8%    │
-                        │  "table"  →  6%    │
-                        │  ...rest  → 24%    │
-                        └────────────────────┘
+┌────────────────────┐
+│  Next token odds:  │
+│                    │
+│  "mat"    → 32%    │
+│  "floor"  → 18%    │
+│  "couch"  → 12%    │
+│  "bed"    →  8%    │
+│  "table"  →  6%    │
+│  ...rest  → 24%    │
+└────────────────────┘
 ```
+
+---
 
 ### How it writes a full response
 
@@ -142,16 +139,13 @@ Input: "The cat sat on the"
 
 ---
 
-## Training Pipeline 🏋️
-
-### Three Stages to Build an LLM
+## Training Pipeline - Three Stages to Build an LLM 🏋️
 
 ```
 ┌──────────────────┬───────────────────┬───────────────────┐
-│                  │                   │                   │
-│  PRE-TRAINING    │   FINE-TUNING     │   RLHF           │
-│                  │                   │                   │
-│  📚 Read the     │   🎯 Learn to be  │   👍 Learn human  │
+│  PRE-TRAINING    │   FINE-TUNING     │   RLHF            │
+├──────────────────┼───────────────────┼───────────────────┤
+│  Read the        │   Learn to be     │   Learn human     │
 │  entire internet │   a helpful       │   preferences     │
 │                  │   assistant       │                   │
 │                  │                   │                   │
@@ -175,28 +169,20 @@ Input: "The cat sat on the"
 ### Everything must fit on the "whiteboard"
 
 ```
-┌───────────────────────────────────────────────────────────┐
-│            CONTEXT WINDOW (e.g., 128K tokens)              │
-│                                                           │
-│  ┌──────────┐  ┌──────────────────┐  ┌────────────────┐  │
-│  │ System   │  │  Conversation    │  │  Model's       │  │
-│  │ Prompt   │  │  History         │  │  Response      │  │
-│  │ (rules)  │  │  (all messages)  │  │  (generating)  │  │
-│  └──────────┘  └──────────────────┘  └────────────────┘  │
-│                                                           │
-│  ◄─────── EVERYTHING must fit in here ──────────────►     │
-└───────────────────────────────────────────────────────────┘
+      ┌──────────────────────────────────────────────────────────┐
+      │            CONTEXT WINDOW (e.g., 128K tokens)            │
+      │                                                          │
+      │  ┌──────────┐  ┌──────────────────┐  ┌────────────────┐  │
+      │  │ System   │  │  Conversation    │  │  Model's       │  │
+      │  │ Prompt   │  │  History         │  │  Response      │  │
+      │  │ (rules)  │  │  (all messages)  │  │  (generating)  │  │
+      │  └──────────┘  └──────────────────┘  └────────────────┘  │
+      │                                                          │
+      │  ◄─────── EVERYTHING must fit in here ──────────────►    │
+      └──────────────────────────────────────────────────────────┘
 ```
 
-### Model Context Sizes
-
-| Model  | Context Window | Approx Words |
-| ------ | :------------: | :----------: |
-| GPT-4  |  128K tokens   |  ~96K words  |
-| Claude |  200K tokens   | ~150K words  |
-| Gemini |   1M+ tokens   | ~750K words  |
-
-- 🪧 **Analogy:** Like a whiteboard — once full, old stuff gets erased
+🪧 It is like how we use a whiteboard — once full, older stuff starts getting erased :(
 
 ---
 
@@ -216,6 +202,8 @@ Temperature = 0 (Precise)         Temperature = 1.0 (Creative)
 
 → Always picks top choice          → Any top option could win
 ```
+
+---
 
 ### When to Use What
 
@@ -255,15 +243,14 @@ Temperature = 0 (Precise)         Temperature = 1.0 (Creative)
 
 ```
 ┌─────────────────────┬─────────────────────┬─────────────────────┐
-│                     │                     │                     │
 │   HALLUCINATIONS    │   KNOWLEDGE CUTOFF  │   NO PRIVATE DATA   │
-│                     │                     │                     │
+├─────────────────────┼─────────────────────┼─────────────────────┤
 │   Confidently       │   Training data     │   Can't access      │
 │   states things     │   has a date.       │   YOUR company's    │
 │   that are FALSE.   │   Nothing after     │   documents, DBs,   │
 │                     │   that exists.      │   or wikis.         │
 │                     │                     │                     │
-│   🗣️ "The Eiffel    │   🗓️ "Who won the   │   📁 "What's our    │
+│   "The Eiffel       │   "Who won the      │   "What's our       │
 │   Tower is 500m"    │   2026 World Cup?"  │   refund policy?"   │
 │   (it's 330m)       │   → "I don't know"  │   → "I don't know"  │
 │                     │                     │                     │
@@ -276,9 +263,8 @@ Temperature = 0 (Precise)         Temperature = 1.0 (Creative)
 
 ```
 ┌─────────────────────┬─────────────────────┬─────────────────────┐
-│                     │                     │                     │
 │   BIAS IN DATA      │   DATA PRIVACY      │   HUMAN OVERSIGHT   │
-│                     │                     │                     │
+├─────────────────────┼─────────────────────┼─────────────────────┤
 │   Models learn from │   Sending data to   │   AI assists,       │
 │   internet text     │   an API = sending  │   humans decide.    │
 │   which contains    │   it to a third     │                     │
@@ -291,11 +277,13 @@ Temperature = 0 (Precise)         Temperature = 1.0 (Creative)
 └─────────────────────┴─────────────────────┴─────────────────────┘
 ```
 
+---
+
 ### Before deploying AI, ask:
 
-- ❓ What data am I sending? Is it sensitive/confidential?
-- ❓ Could bias in outputs affect people unfairly?
-- ❓ Who reviews the AI's output before it reaches users?
+❓ What data am I sending? Is it sensitive/confidential?
+❓ Could bias in outputs affect people unfairly?
+❓ Who reviews the AI's output before it reaches users?
 
 ---
 
@@ -311,6 +299,8 @@ Temperature = 0 (Precise)         Temperature = 1.0 (Creative)
 | Fine-tuning          | $100s-$1000s per run |
 
 > 💡 A chatbot with 10K queries/day can cost $100+/day in API calls!
+
+---
 
 ### The Solution to the Knowledge Gap
 
@@ -354,31 +344,20 @@ Text                    Embedding (simplified — usually 768-1536 numbers)
 
 ## Semantic Space — Meaning Has a Map 🗺️
 
-### Imagine plotting text by meaning (reduced to 2D)
-
 ```
-                    SEMANTIC SPACE
-    ─────────────────────────────────────────
-    │
+            SEMANTIC SPACE (reduced to 2D)
+    ┌────────────────────────────────────────
     │          ● "happy"
     │       ● "joyful"       ● "excited"
     │         ● "cheerful"
-    │
-    │
     │                              ● "sad"
     │                           ● "unhappy"
     │                         ● "depressed"
-    │
-    │
     │  ● "python"
     │    ● "javascript"
     │      ● "coding"
     │
-    │         ● "car"
-    │       ● "truck"
-    │          ● "vehicle"
-    │
-    ─────────────────────────────────────────
+    └────────────────────────────────────────
 ```
 
 - 🎯 Similar concepts **cluster together** regardless of spelling!
@@ -400,6 +379,8 @@ Text                    Embedding (simplified — usually 768-1536 numbers)
      Score ≈ 1.0           Score ≈ 0.0           Score ≈ -1.0
 ```
 
+---
+
 ### Real Examples
 
 | Sentence A                    | Sentence B                        |  Score   |
@@ -419,12 +400,9 @@ Text                    Embedding (simplified — usually 768-1536 numbers)
 KEYWORD SEARCH                    VECTOR SEARCH
 ──────────────────                ──────────────────
 Query: "password reset"           Query: "I can't log in"
-
 Looks for EXACT WORDS             Finds MEANING matches
-
 ❌ Misses: "account recovery"     ✅ Finds: "password reset guide"
 ❌ Misses: "login help"           ✅ Finds: "account recovery steps"
-❌ Misses: "credentials forgot"   ✅ Finds: "login troubleshooting"
 ```
 
 ### Popular Vector Databases
@@ -447,25 +425,24 @@ Looks for EXACT WORDS             Finds MEANING matches
 ### You can't embed a 100-page document as one vector
 
 ```
-PROBLEM:
-┌─────────────────────────────────────────────────┐
-│             100-PAGE DOCUMENT                    │
-│                                                 │
-│  One embedding for ALL of this?                 │
-│  → Meaning is too vague/diluted                 │
-│  → Can't pinpoint which PART is relevant        │
-│  → Too big to fit in LLM context anyway         │
-└─────────────────────────────────────────────────┘
-                    │
-                    ▼ CHUNK IT
-┌────────┐ ┌────────┐ ┌────────┐ ┌────────┐ ┌────────┐
-│Chunk 1 │ │Chunk 2 │ │Chunk 3 │ │Chunk 4 │ │Chunk 5 │
-│~500 tok│ │~500 tok│ │~500 tok│ │~500 tok│ │~500 tok│
-│        │ │        │ │        │ │        │ │        │
-│Own     │ │Own     │ │Own     │ │Own     │ │Own     │
-│embed.  │ │embed.  │ │embed.  │ │embed.  │ │embed.  │
-└────────┘ └────────┘ └────────┘ └────────┘ └────────┘
+            ┌─────────────────────────────────────────────────┐
+            │             100-PAGE DOCUMENT                   │
+            │  One embedding for ALL of this?                 │
+            │  → Meaning is too vague/diluted                 │
+            │  → Can't pinpoint which PART is relevant        │
+            │  → Too big to fit in LLM context anyway         │
+            └─────────────────────────────────────────────────┘
+                                    │
+                                    ▼ CHUNK IT
+           ┌────────┐ ┌────────┐ ┌────────┐ ┌────────┐ ┌────────┐
+           │Chunk 1 │ │Chunk 2 │ │Chunk 3 │ │Chunk 4 │ │Chunk 5 │
+           │~500 tok│ │~500 tok│ │~500 tok│ │~500 tok│ │~500 tok│
+           │Own     │ │Own     │ │Own     │ │Own     │ │Own     │
+           │embed.  │ │embed.  │ │embed.  │ │embed.  │ │embed.  │
+           └────────┘ └────────┘ └────────┘ └────────┘ └────────┘
 ```
+
+---
 
 - ✅ Each chunk has **focused meaning**
 - ✅ Each can be **retrieved independently**
@@ -475,24 +452,20 @@ PROBLEM:
 
 ## Chunking Strategies 🧩
 
-### Three Approaches
-
 ```
 STRATEGY 1: Fixed-size
-─────────────────────────────────────
+───────────────────────
 [  500 tokens  ][  500 tokens  ][  500 tokens  ]
                 ↑
     ⚠️ Might split mid-sentence!
 ✅ Simple    ❌ Can break meaning
-
-
+─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─
 STRATEGY 2: Sentence/paragraph-based
 ─────────────────────────────────────
 [Paragraph 1][  Paragraph 2  ][Para 3][Paragraph 4  ]
 
 ✅ Respects natural breaks    ❌ Uneven sizes
-
-
+─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─
 STRATEGY 3: Semantic chunking
 ─────────────────────────────────────
 [ Topic A content ][ Topic B content ][ Topic C ]
@@ -503,8 +476,6 @@ STRATEGY 3: Semantic chunking
 ---
 
 ## Overlap: Don't Lose Context 🔗
-
-### Without overlap — information gets split
 
 ```
 WITHOUT overlap:
@@ -537,12 +508,9 @@ Chunk 2:       ...policy requires customers to submit within 30 days of purchase
 
 ## What is RAG? 📖
 
-### Give the LLM relevant info BEFORE asking it to answer
-
 ```
 WITHOUT RAG:                       WITH RAG:
 ─────────────────                  ─────────────────
-
 You: "What's our                   You: "What's our
       refund policy?"                    refund policy?"
                                              │
@@ -550,17 +518,15 @@ You: "What's our                   You: "What's our
                                    [🔍 Search your docs]
                                              │
                                              ▼
-                                   [Found: policy.pdf
-                                    section 4.2]
+                                   [Found: policy.pdf section 4.2]
                                              │
                                              ▼
-LLM: "I don't have                 LLM: "Based on your policy,
-      that information"                  refunds are available
-                                         within 30 days with
-                                         receipt. See section 4.2"
+LLM: "I don't have                 LLM: "Based on your policy, refunds
+      that information"                  are available within 30 days
+                                         with receipt. See section 4.2"
 ```
 
-- 📚 **Analogy:** Open-book exam — hand the student the right pages, THEN ask
+📚 It's like an open-book exam — hand the student the right pages, THEN ask
 
 ---
 
@@ -569,12 +535,10 @@ LLM: "I don't have                 LLM: "Based on your policy,
 ### Phase 1: Ingestion (one-time setup)
 
 ```
-┌──────────┐     ┌──────────┐     ┌──────────┐     ┌──────────┐
-│          │     │          │     │          │     │          │
-│  Your    │────►│  CHUNK   │────►│  EMBED   │────►│  STORE   │
-│Documents │     │  into    │     │  each    │     │  in      │
-│          │     │  pieces  │     │  chunk   │     │ Vector DB│
-└──────────┘     └──────────┘     └──────────┘     └──────────┘
+┌──────────┐     ┌────────────┐     ┌────────────┐     ┌────────────┐
+│  Your    │────►│  CHUNK into│────►│  EMBED each │────►│  STORE in  │
+│Documents │     │  pieces    │     │  chunk      │     │  Vector DB │
+└──────────┘     └────────────┘     └─────────────┘     └────────────┘
 ```
 
 ### Phase 2: Query (every question)
@@ -584,7 +548,6 @@ LLM: "I don't have                 LLM: "Based on your policy,
 │  User    │────►│  EMBED   │────►│  SEARCH  │────►│ RETRIEVE │
 │ Question │     │  query   │     │ Vector DB│     │ Top 3-5  │
 └──────────┘     └──────────┘     └──────────┘     └────┬─────┘
-                                                        │
                                                         ▼
                                          ┌─────────────────────────┐
                                          │ Send chunks + question  │
@@ -596,8 +559,6 @@ LLM: "I don't have                 LLM: "Based on your policy,
 
 ## RAG in Pseudocode 🐍
 
-### What the code looks like conceptually
-
 ```python
 # ═══ PHASE 1: INGESTION (run once) ═══
 
@@ -605,7 +566,6 @@ documents = load_documents("company_docs/")
 chunks = split_into_chunks(documents, size=500, overlap=50)
 embeddings = embed(chunks)
 vector_db.store(chunks, embeddings)
-
 
 # ═══ PHASE 2: QUERY (every question) ═══
 
@@ -623,13 +583,35 @@ Question: {question}
 answer = llm.generate(prompt)
 ```
 
-- 🔮 **Preview:** We'll build this for real in Python in future sessions!
+---
+
+## What is Fine-tuning? 🎓
+
+### Teaching the model NEW behavior with YOUR data
+
+```
+Fine-tuning = take a pre-trained model and train it further on your specific data
+
+┌──────────────────┐      ┌──────────────────┐      ┌──────────────────┐
+│   Base Model     │  +   │   Your Data      │  =   │  Specialized     │
+│   (GPT, Claude,  │      │   (examples of   │      │  Model           │
+│    Llama, etc.)  │      │   desired input/ │      │  (behaves the    │
+│                  │      │   output pairs)  │      │   way you want)  │
+└──────────────────┘      └──────────────────┘      └──────────────────┘
+```
+
+- 👨‍🍳 Like hiring a trained chef (base model) and teaching them YOUR restaurant's recipes (fine-tuning)
+- The chef already knows how to cook — you're just specializing their skills
+
+### When it's used
+
+- 🎭 Custom tone/style (e.g., "write like our brand voice")
+- 🏥 Domain-specific language (medical, legal, financial)
+- 📏 Consistent output format
 
 ---
 
 ## RAG vs Fine-tuning ⚖️
-
-### When to use which?
 
 | Factor             | RAG ✅                               | Fine-tuning                 |
 | :----------------- | :----------------------------------- | :-------------------------- |
@@ -665,13 +647,10 @@ answer = llm.generate(prompt)
 │  - Always cite the relevant policy number           │
 │  - If you don't know, say "I don't know"            │
 │  - Never make up information                        │
-│                                                     │
 └─────────────────────────────────────────────────────┘
           │
           ▼ Shapes ALL responses in the conversation
 ```
-
-### Why It Matters
 
 - 🎯 Sets boundaries and expectations
 - 🛡️ Prevents unwanted behavior
@@ -681,8 +660,6 @@ answer = llm.generate(prompt)
 
 ## Few-Shot: Teaching by Example 📝
 
-### Show the model what you want
-
 ```
 PROMPT:
 ─────────────────────────────────────
@@ -690,14 +667,11 @@ Convert informal text to professional email language.
 
 Input: "Hey, can u fix this ASAP?"
 Output: "Hello, could you please address this at your earliest convenience?"
-
 Input: "thx for the help!"
 Output: "Thank you for your assistance."
-
 Input: "gonna need that report by tmrw"
 Output: ???
 ─────────────────────────────────────
-
 MODEL RESPONSE:
 "I will need that report by tomorrow."
 ```
@@ -719,7 +693,6 @@ Q: "3 shirts at $25 each,         Q: "Think step by step.
     20% off. I have $60.               3 shirts at $25 each,
     Can I buy all 3?"                  20% off. I have $60.
                                        Can I buy all 3?"
-
 A: "Yes"                           A: "Step 1: Price = $25 each
     ← sometimes wrong!                 Step 2: 20% off = $5 discount
                                        Step 3: Sale price = $20
@@ -728,12 +701,11 @@ A: "Yes"                           A: "Step 1: Price = $25 each
                                        Yes! Exactly enough." ✅
 ```
 
-- 🎯 Dramatically improves accuracy on reasoning tasks
-- 💡 Just add "think step by step" to your prompts!
+🎯 Dramatically improves accuracy on reasoning tasks
 
 ---
 
-## Recap & What's Next 🎉
+## Recap 🎉
 
 ### What We Covered Today
 
@@ -744,21 +716,14 @@ A: "Yes"                           A: "Step 1: Price = $25 each
 - 🔎 **Vector search** — find by meaning, not keywords
 - ✂️ **Chunking** — break docs into searchable pieces
 - 🔄 **RAG** — retrieve → augment → generate
+- 🎓 **Fine-tuning** — specialize a model with your data
 - 💬 **Prompt engineering** — system prompts, few-shot, CoT
-
-### Coming Up in Future Sessions
-
-- 🐍 Calling LLM APIs from Python
-- 🔢 Generating embeddings programmatically
-- 🗄️ Setting up a vector database
-- 🤖 Building an end-to-end Q&A system
-- 🛠️ Agents & tool use
 
 ---
 
 ## Quick Reference Card 📇
 
-| Term                 | Plain English                           |
+| Term                 | Meaning                                 |
 | :------------------- | :-------------------------------------- |
 | **Token**            | A piece of a word (~4 characters)       |
 | **LLM**              | Predicts next token based on patterns   |
@@ -768,6 +733,7 @@ A: "Yes"                           A: "Step 1: Price = $25 each
 | **Vector DB**        | Database for similarity search          |
 | **Chunking**         | Splitting docs into small pieces        |
 | **RAG**              | Retrieve docs, then generate answer     |
+| **Fine-tuning**      | Retrain a model on your specific data   |
 | **System Prompt**    | Instructions shaping model behavior     |
 | **Few-shot**         | Teaching by giving examples             |
 | **Chain-of-Thought** | "Think step by step"                    |

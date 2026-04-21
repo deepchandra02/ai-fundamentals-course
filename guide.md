@@ -393,6 +393,23 @@ QUERY (every time a user asks):
 5. LLM answers based on YOUR documents, not its training data
 ```
 
+### What is Fine-tuning?
+
+Fine-tuning takes a pre-trained model and trains it further on your specific data. The model's weights actually change — it "learns" your patterns.
+
+```
+┌──────────────────┐      ┌──────────────────┐      ┌──────────────────┐
+│   Base Model     │  +   │   Your Data      │  =   │  Specialized     │
+│   (GPT, Claude,  │      │   (input/output  │      │  Model           │
+│    Llama, etc.)  │      │    examples)     │      │  (your style/    │
+│                  │      │                  │      │   behavior)      │
+└──────────────────┘      └──────────────────┘      └──────────────────┘
+```
+
+> **Analogy**: Like hiring a trained chef and teaching them YOUR restaurant's recipes. They already know how to cook — you're specializing their skills.
+
+**Common use cases:** custom brand voice, domain-specific language (medical, legal), consistent output formatting.
+
 ### Why RAG Over Fine-tuning?
 
 | Factor | RAG | Fine-tuning |
