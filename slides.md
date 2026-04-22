@@ -602,12 +602,8 @@ Fine-tuning = take a pre-trained model and train it further on your specific dat
 
 - 👨‍🍳 Like hiring a trained chef (base model) and teaching them YOUR restaurant's recipes (fine-tuning)
 - The chef already knows how to cook — you're just specializing their skills
-
-### When it's used
-
 - 🎭 Custom tone/style (e.g., "write like our brand voice")
 - 🏥 Domain-specific language (medical, legal, financial)
-- 📏 Consistent output format
 
 ---
 
